@@ -1,0 +1,51 @@
+{
+  "name": "cc-gh-pages",
+  "author": "Rodinei Teixeira",
+  "keywords": [
+    "react",
+    "template",
+    "bootstrap",
+    "jquery"
+  ],
+  "description": "project react frontend personal finance management systems",
+  "version": "0.1.0",
+  "homepage": "https://rodineiti.github.io/frontend-react-gh-pages",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.19.0",
+    "gh-pages": "^2.0.1",
+    "highcharts": "^7.1.2",
+    "highcharts-react-official": "^2.2.2",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.26",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "3.0.1",
+    "react-toastify": "^5.3.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
