@@ -1,5 +1,5 @@
 {
-  "name": "Gestão de finanças pessoal",
+  "name": "frontend-react",
   "author": "Rodinei Teixeira",
   "keywords": [
     "react",
@@ -9,7 +9,6 @@
   ],
   "description": "project react frontend personal finance management systems",
   "version": "0.1.0",
-  "homepage": "https://trusting-panini-e7a32d.netlify.com",
   "private": true,
   "dependencies": {
     "axios": "^0.19.1",
