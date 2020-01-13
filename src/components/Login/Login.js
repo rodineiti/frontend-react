@@ -52,7 +52,7 @@ class Login extends Component {
         return (
             <Content>
                 <form className="form-signin text-center" onSubmit={(e) => this.onSubmit(e)}>
-                    <img className="mb-4" src="https://via.placeholder.com/570x75/007bff/00000?text=Rdn+Finance" alt="img" />
+                    <img className="img-fluid mb-4" src="https://via.placeholder.com/570x75/007bff/00000?text=Rdn+Finance" alt="img" />
                     <h1 className="h3 mb-3 font-weight-normal">Login - Controle de Finanças</h1>
                     <div className="form-group">
                         <label htmlFor="email" className="sr-only">E-mail</label>
