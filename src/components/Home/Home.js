@@ -84,7 +84,7 @@ class Home extends Component {
     }
 
     render() {
-        const { total_pays, total_receives, categories, isResults } = this.state;
+        const { total_pays, total_receives, categories, dateStart, dateEnd, isResults } = this.state;
         return (
             <React.Fragment>
                 <Content>
@@ -132,7 +132,7 @@ class Home extends Component {
                                         <div className="row">
                                             <div className="col-md-12">
                                                 <div className="text-center">
-                                                    <h2>Totais no período</h2>
+                                                    <h2>Totais no período: De {dateStart} à {dateEnd}</h2>
                                                     <p>
                                                         <strong>Recebidos: </strong>
                                                         R$ {total_receives}
