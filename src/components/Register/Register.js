@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { toast } from 'react-toastify';
 import Content from '../Content';
 
-import './Register.css';
+import './Register.scss';
 import { errorsMessage } from '../../helpers';
 import { isLoggedIn } from '../../services/auth';
 import apis from '../../services/api';
@@ -14,7 +14,7 @@ class Register extends Component {
         email: '',
         password: '',
         password_confirmation: '',
-        url: process.env.NODE_ENV === 'development' ? '/' : '/frontend-react-gh-pages'
+        url: '/'
     };
 
     componentDidMount() {
@@ -59,7 +59,7 @@ class Register extends Component {
         return (
             <Content>
                 <form className="form-signup text-center" onSubmit={(e) => this.onSubmit(e)}>
-                    <img className="mb-4" src="https://via.placeholder.com/75" alt="img" />
+                    <img className="mb-4" src="https://via.placeholder.com/570x75/007bff/00000?text=Rdn+Finance" alt="img" />
                     <h1 className="h3 mb-3 font-weight-normal">Registro - Controle de Finanças</h1>
                     <div className="form-group">
                         <label htmlFor="name" className="sr-only">Nome</label>

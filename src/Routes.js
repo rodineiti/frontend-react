@@ -48,6 +48,7 @@ function Routes(props) {
 
             <PrivateRoute exact path="/report" authenticated={isLoggedIn()} component={Report} />
             <PrivateRoute exact path="/graphic" authenticated={isLoggedIn()} component={Graphic} />
+
             <Redirect from="*" to="/" />
         </Switch>
     )

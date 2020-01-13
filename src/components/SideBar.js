@@ -8,7 +8,7 @@ function Sidebar(props) {
             <nav id="sidebar">
                 <div className="sidebar-header">
                     <h3>
-                        <img src="https://via.placeholder.com/210x40" alt="logo" />
+                        <img src="https://via.placeholder.com/210x48/FFFFFF/00000?text=Rdn+Finance" alt="logo" />
                     </h3>
                 </div>
 

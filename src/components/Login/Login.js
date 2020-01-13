@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import Content from '../Content';
 
-import './Login.css';
+import './Login.scss';
 import { errorsMessage } from '../../helpers';
 import apis from '../../services/api';
 import { setUser, isLoggedIn } from '../../services/auth';
@@ -14,7 +14,7 @@ class Login extends Component {
     state = {
         email: '',
         password: '',
-        url: process.env.NODE_ENV === 'development' ? '/' : '/frontend-react-gh-pages'
+        url: '/'
     };
 
     componentDidMount() {
@@ -52,7 +52,7 @@ class Login extends Component {
         return (
             <Content>
                 <form className="form-signin text-center" onSubmit={(e) => this.onSubmit(e)}>
-                    <img className="mb-4" src="https://via.placeholder.com/75" alt="img" />
+                    <img className="mb-4" src="https://via.placeholder.com/570x75/007bff/00000?text=Rdn+Finance" alt="img" />
                     <h1 className="h3 mb-3 font-weight-normal">Login - Controle de Finanças</h1>
                     <div className="form-group">
                         <label htmlFor="email" className="sr-only">E-mail</label>
@@ -60,7 +60,7 @@ class Login extends Component {
                             <div className="input-group-prepend">
                                 <div className="input-group-text"><i className="fas fa-envelope-square"></i></div>
                             </div>
-                            <input type="text" id="email" name="email" className="form-control" placeholder="E-mail" required onChange={e => this.setState({ email: e.target.value })} />
+                            <input type="text" id="email" name="email" className="form-control" placeholder="E-mail" value={this.state.email} required onChange={e => this.setState({ email: e.target.value })} />
                         </div>
                     </div>
                     <div className="form-group">
@@ -69,7 +69,7 @@ class Login extends Component {
                             <div className="input-group-prepend">
                                 <div className="input-group-text"><i className="fas fa-unlock-alt"></i></div>
                             </div>
-                            <input type="password" id="password" name="password" className="form-control" placeholder="Senha" required onChange={e => this.setState({ password: e.target.value })} />
+                            <input type="password" id="password" name="password" className="form-control" placeholder="Senha" value={this.state.password} required onChange={e => this.setState({ password: e.target.value })} />
                         </div>
                     </div>
                     <button

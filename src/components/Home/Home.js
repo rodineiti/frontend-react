@@ -9,8 +9,8 @@ import { errorsMessage } from '../../helpers';
 
 class Home extends Component {
     state = {
-        dateStart: moment().subtract(6, 'months').format('YYYY-MM-DD'),
-        dateEnd: moment().format('YYYY-MM-DD'),
+        dateStart: moment().startOf('months').format('YYYY-MM-DD'),
+        dateEnd: moment().endOf('months').format('YYYY-MM-DD'),
         billPays: [],
         billReceives: [],
         total_pays: 0,
@@ -59,7 +59,7 @@ class Home extends Component {
         let data = this.state.billPays || [];
         return data.map((item, key) => {
             return (
-                <a key={key} href="javascript:void(0)" className="list-group-item list-group-item-action">
+                <a key={key} href="#/" className="list-group-item list-group-item-action">
                     <div className="d-flex w-100 justify-content-between">
                         <h5 className="mb-1"><i className="fas fa-minus"></i> {item.date_launch} - {item.name}</h5>
                         <span className="badge badge-warning badge-pill">R$ {item.value}</span>
@@ -73,7 +73,7 @@ class Home extends Component {
         let data = this.state.billReceives || [];
         return data.map((item, key) => {
             return (
-                <a key={key} href="javascript:void(0)" className="list-group-item list-group-item-action">
+                <a key={key} href="#/" className="list-group-item list-group-item-action">
                     <div className="d-flex w-100 justify-content-between">
                         <h5 className="mb-1"><i className="fas fa-plus"></i> {item.date_launch} - {item.name}</h5>
                         <span className="badge badge-primary badge-pill">R$ {item.value}</span>

@@ -28,11 +28,7 @@ function Header(props) {
                                     onClick={(e) => {
                                         e.preventDefault();
                                         logout();
-                                        if (process.env.NODE_ENV === 'development') {
-                                            window.location.href = '/';
-                                        } else {
-                                            window.location.href = '/frontend-react-gh-pages';
-                                        }
+                                        window.location.href = '/';
                                     }}>Logout</button>
                             </li>
                         ) : (

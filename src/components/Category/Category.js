@@ -70,7 +70,7 @@ class Category extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="card-body">
+                                <div className="card-body table-responsive">
                                     <table className="table table-striped">
                                         <thead>
                                             <tr>
