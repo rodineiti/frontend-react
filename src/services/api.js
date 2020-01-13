@@ -11,10 +11,49 @@ api.interceptors.request.use(function (config) {
     if (token != null) {
         config.headers.Authorization = `Bearer ${token}`;
     }
+    addLoading();
     return config;
 }, function (err) {
     return Promise.reject(err);
 });
+
+api.interceptors.response.use(function (response) {
+    removeLoading();
+    return response;
+}, function (err) {
+    removeLoading();
+    return Promise.reject(err);
+});
+
+const addLoading = () => {
+  document.body.classList.add('preloader');
+
+  if (!document.getElementById('preloader')) {
+    const divPreloader = document.createElement('div');
+    divPreloader.setAttribute('id', 'preloader');
+
+    const divBox = document.createElement('div');
+    divBox.classList.add('preloader-box');
+
+    for (let i = 0; i <= 3; i++) {
+      const div = document.createElement('div');
+      div.classList.add('item');
+      div.classList.add('item-' + (i+1));
+      divBox.appendChild(div)
+    }
+
+    divPreloader.appendChild(divBox);
+
+    document.body.appendChild(divPreloader);
+  }
+}
+
+const removeLoading = () => {
+  document.body.classList.remove('preloader');
+  if (document.getElementById('preloader')) {
+    document.getElementById('preloader').remove();
+  }
+}
 
 export const getLogin = (email, password) => api.post(`/oauth/token`, {
     grant_type: constants.grant_type,
