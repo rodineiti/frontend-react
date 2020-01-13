@@ -1,5 +1,5 @@
 {
-  "name": "cc-gh-pages",
+  "name": "Gestão de finanças pessoal",
   "author": "Rodinei Teixeira",
   "keywords": [
     "react",
@@ -9,17 +9,10 @@
   ],
   "description": "project react frontend personal finance management systems",
   "version": "0.1.0",
-  "homepage": "https://rodineiti.github.io/frontend-react-gh-pages",
+  "homepage": "https://trusting-panini-e7a32d.netlify.com",
   "private": true,
   "dependencies": {
-    "@fullcalendar/core": "^4.3.1",
-    "@fullcalendar/daygrid": "^4.3.0",
-    "@fullcalendar/interaction": "^4.3.0",
-    "@fullcalendar/list": "^4.3.0",
-    "@fullcalendar/react": "^4.3.0",
-    "@fullcalendar/timegrid": "^4.3.0",
     "axios": "^0.19.1",
-    "gh-pages": "^2.2.0",
     "highcharts": "^7.2.1",
     "highcharts-react-official": "^2.2.2",
     "moment": "^2.24.0",
@@ -38,7 +31,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
