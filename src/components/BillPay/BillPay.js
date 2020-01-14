@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Modal from '../Modal';
 import Content from '../Content';
 import apis from '../../services/api';
 import { errorsMessage } from '../../helpers';
 
 class BillPay extends Component {
     state = {
-        list: []
+        list: [],
+        itemId: null,
+        modalVisible: false
     };
 
     componentDidMount() {
@@ -37,6 +40,15 @@ class BillPay extends Component {
             }).finally(() => console.log('end'));
     }
 
+    openModal = (itemId = null) => {
+        this.setState({ modalVisible: !this.state.modalVisible, itemId });
+    }
+
+    handleDelete = (itemId) => {
+        this.destroy(itemId);
+        this.openModal();
+    }
+
     renderList = (list) => {
         let data = this.state.list || [];
         return data.map((item, key) => {
@@ -50,7 +62,7 @@ class BillPay extends Component {
                     <td>
                         <Link className="btn btn-info" to={`/billpay/edit/${item.id}`}>Editar</Link>
                     </td>
-                    <td><button onClick={() => this.destroy(item.id)} className="btn btn-danger">Deletar</button></td>
+                    <td><button onClick={(itemId) => this.openModal(item.id)} className="btn btn-danger">Deletar</button></td>
                 </tr>
             )
         })
@@ -94,6 +106,12 @@ class BillPay extends Component {
                             </div>
                         </div>
                     </div>
+
+                    <Modal
+                      openModal={this.openModal}
+                      modalVisible={this.state.modalVisible}
+                      handleDelete={() => this.handleDelete(this.state.itemId)}
+                    />
                 </Content>
             </React.Fragment>
         )

@@ -22,7 +22,7 @@ class AddCategory extends Component {
                     toast.success(response.data.message);
                     setTimeout(() => {
                         this.props.history.push('/category');
-                    }, 2000);
+                    }, 1000);
                 } else {
                     toast.info(response.data.message);
                 }
