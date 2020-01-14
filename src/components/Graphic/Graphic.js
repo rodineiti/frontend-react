@@ -14,6 +14,10 @@ class Graphic extends Component {
         isResults: false
     }
 
+    componentDidMount() {
+        document.getElementById("sidebar").classList.remove('active');
+    }
+
     onSubmit = event => {
         event.preventDefault();
         const { dateStart, dateEnd } = this.state;
