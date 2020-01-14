@@ -36,7 +36,7 @@ class Register extends Component {
             apis.postRegister(body)
                 .then(response => {
                     if (response.data) {
-                        this.redirect('Cadastro realizado com sucesso.', 2000, this.state.url);
+                        this.redirect('Cadastro realizado com sucesso. Estamos redirecionando para o login. Aguarde...', 1000, this.state.url);
                     } else {
                         toast.info('Erro ao tentar cadastrar, favor verificar');
                     }

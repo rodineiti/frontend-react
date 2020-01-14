@@ -30,7 +30,7 @@ class Login extends Component {
                 .then(response => {
                     if (response.data) {
                         setUser(response.data);
-                        this.redirect('Login realizado com sucesso.', 1000, this.state.url);
+                        this.redirect('Login realizado com sucesso.', 300, this.state.url);
                     } else {
                         toast.info('Usuário ou senha inválidos, favor verificar');
                     }

@@ -26,8 +26,11 @@ api.interceptors.response.use(function (response) {
 });
 
 const addLoading = () => {
-  document.getElementById("sidebar").classList.remove('active');
   document.body.classList.add('preloader');
+
+  if (document.getElementById("sidebar")) {
+    document.getElementById("sidebar").classList.remove('active');
+  }
 
   if (!document.getElementById('preloader')) {
     const divPreloader = document.createElement('div');
