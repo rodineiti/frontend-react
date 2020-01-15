@@ -9,16 +9,18 @@ class AddBillReceive extends Component {
     state = {
         date_launch: '',
         name: '',
-        value: ''
+        value: '',
+        status: '1'
     }
 
     onSubmit = event => {
         event.preventDefault();
-        const { date_launch, name, value } = this.state;
+        const { date_launch, name, value, status } = this.state;
         const body = {
             date_launch,
             name,
-            value
+            value,
+            status
         };
         apis.postBillReceives(body)
             .then(response => {
@@ -26,7 +28,7 @@ class AddBillReceive extends Component {
                     toast.success(response.data.message);
                     setTimeout(() => {
                         this.props.history.push('/billreceive');
-                    }, 1000);
+                    }, 500);
                 } else {
                     toast.info(response.data.message);
                 }
@@ -41,7 +43,7 @@ class AddBillReceive extends Component {
     }
 
     render() {
-        const { date_launch, name, value } = this.state;
+        const { date_launch, name, value, status } = this.state;
         return (
             <React.Fragment>
                 <Content>
@@ -71,6 +73,14 @@ class AddBillReceive extends Component {
                                         <div className="form-group">
                                             <label htmlFor="name">Valor</label>
                                             <input className="form-control" type="text" value={value} name="value" required onChange={this.changeField} />
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="name">Status</label>
+                                            <select className="form-control" name="status" value={status} onChange={this.changeField}>
+                                                <option value="">Selecionar o Status</option>
+                                                <option value={'1'}>Recebido</option>
+                                                <option value={'0'}>Não Recebido</option>
+                                            </select>
                                         </div>
                                         <div className="form-group">
                                             <input className="btn btn-primary" type="submit" name="submit" value="Adicionar" />

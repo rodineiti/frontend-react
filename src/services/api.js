@@ -80,12 +80,14 @@ export const getBillReceives = () => api.get(`/api/v1/bill_receives`);
 export const postBillReceives = (formData) => api.post(`/api/v1/bill_receives/store`, formData);
 export const getBillReceive = (id) => api.get(`/api/v1/bill_receives/show/${id}`);
 export const putBillReceives = (id, formData) => api.put(`api/v1/bill_receives/update/${id}`, formData);
+export const putBillReceivesToggle = (id, formData) => api.put(`api/v1/bill_receives/toggle/${id}`, formData);
 export const delBillReceive = (id) => api.delete(`/api/v1/bill_receives/destroy/${id}`);
 
 export const getBillPays = () => api.get(`/api/v1/bill_pays`);
 export const postBillPays = (formData) => api.post(`/api/v1/bill_pays/store`, formData);
 export const getBillPay = (id) => api.get(`/api/v1/bill_pays/show/${id}`);
 export const putBillPays = (id, formData) => api.put(`api/v1/bill_pays/update/${id}`, formData);
+export const putBillPaysToggle = (id, formData) => api.put(`api/v1/bill_pays/toggle/${id}`, formData);
 export const delBillPay = (id) => api.delete(`/api/v1/bill_pays/destroy/${id}`);
 
 export const sumChartsByPeriod = (formData) => api.post(`/api/v1/charts`, formData);
@@ -103,11 +105,13 @@ const apis = {
     postBillReceives,
     getBillReceive,
     putBillReceives,
+    putBillReceivesToggle,
     delBillReceive,
     getBillPays,
     postBillPays,
     getBillPay,
     putBillPays,
+    putBillPaysToggle,
     delBillPay,
     sumChartsByPeriod,
     getStatementByPeriod

@@ -19,7 +19,11 @@ function App() {
           </div>
         </BrowserRouter>
       </div>
-      <ToastContainer />
+      <ToastContainer 
+        autoClose={3000}
+        draggable={false}
+        pauseOnFocusLoss={false}
+       />
     </>
   );
 }

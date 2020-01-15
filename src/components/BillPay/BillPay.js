@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Switch from "react-switch";
 import Modal from '../Modal';
 import Content from '../Content';
 import apis from '../../services/api';
@@ -40,6 +41,20 @@ class BillPay extends Component {
             }).finally(() => console.log('end'));
     }
 
+    toggle = (item) => {
+        apis.putBillPaysToggle(item.id, { status: !item.status})
+            .then(response => {
+                if (response.data.status === 'success') {
+                    toast.success(response.data.message);
+                    this.index();
+                } else {
+                    toast.info('Erro tentar atualizar, favor verificar');
+                }
+            }).catch(function (error) {
+                errorsMessage(error.response);
+            }).finally(() => console.log('end'));
+    }
+
     openModal = (itemId = null) => {
         this.setState({ modalVisible: !this.state.modalVisible, itemId });
     }
@@ -59,6 +74,9 @@ class BillPay extends Component {
                     <td>{item.date_launch}</td>
                     <td>{item.name}</td>
                     <td>{item.value}</td>
+                    <td>
+                        <Switch onChange={() => this.toggle(item)} checked={item.status} />
+                    </td>
                     <td>
                         <Link className="btn btn-info" to={`/billpay/edit/${item.id}`}>Editar</Link>
                     </td>
@@ -94,6 +112,7 @@ class BillPay extends Component {
                                                 <th scope="col">Data Lançamento</th>
                                                 <th scope="col">Nome</th>
                                                 <th scope="col">Valor</th>
+                                                <th scope="col">Pago/Não Pago</th>
                                                 <th scope="col">Editar</th>
                                                 <th scope="col">Deletar</th>
                                             </tr>

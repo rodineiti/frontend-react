@@ -11,6 +11,7 @@ class AddBillPay extends Component {
         date_launch: '',
         name: '',
         value: '',
+        status: '1',
         categories: []
     }
 
@@ -29,12 +30,13 @@ class AddBillPay extends Component {
 
     onSubmit = event => {
         event.preventDefault();
-        const { category_id, date_launch, name, value } = this.state;
+        const { category_id, date_launch, name, value, status } = this.state;
         const body = {
             category_id,
             date_launch,
             name,
-            value
+            value,
+            status
         };
         apis.postBillPays(body)
             .then(response => {
@@ -42,7 +44,7 @@ class AddBillPay extends Component {
                     toast.success(response.data.message);
                     setTimeout(() => {
                         this.props.history.push('/billpay');
-                    }, 1000);
+                    }, 500);
                 } else {
                     toast.info('Erro tentar cadastrar, favor verificar');
                 }
@@ -57,7 +59,7 @@ class AddBillPay extends Component {
     }
 
     render() {
-        const { category_id, date_launch, name, value, categories } = this.state;
+        const { category_id, date_launch, name, value, status, categories } = this.state;
         return (
             <React.Fragment>
                 <Content>
@@ -96,6 +98,14 @@ class AddBillPay extends Component {
                                         <div className="form-group">
                                             <label htmlFor="name">Valor</label>
                                             <input className="form-control" type="text" value={value} name="value" required onChange={this.changeField} />
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="name">Status</label>
+                                            <select className="form-control" name="status" value={status} onChange={this.changeField}>
+                                                <option value="">Selecionar o Status</option>
+                                                <option value={'1'}>Pago</option>
+                                                <option value={'0'}>Não Pago</option>
+                                            </select>
                                         </div>
                                         <div className="form-group">
                                             <input className="btn btn-primary" type="submit" name="submit" value="Adicionar" />
