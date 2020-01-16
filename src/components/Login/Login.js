@@ -60,7 +60,7 @@ class Login extends Component {
                             <div className="input-group-prepend">
                                 <div className="input-group-text"><i className="fas fa-envelope-square"></i></div>
                             </div>
-                            <input type="text" id="email" name="email" className="form-control" placeholder="E-mail" value={this.state.email} required onChange={e => this.setState({ email: e.target.value })} />
+                            <input type="email" id="email" name="email" className="form-control" placeholder="E-mail" value={this.state.email} required onChange={e => this.setState({ email: e.target.value })} />
                         </div>
                     </div>
                     <div className="form-group">
