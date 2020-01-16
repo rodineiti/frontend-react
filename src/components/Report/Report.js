@@ -8,6 +8,7 @@ class Report extends Component {
     state = {
         dateStart: '',
         dateEnd: '',
+        status: '1',
         billPays: [],
         billReceives: [],
         total_pays: 0,
@@ -21,9 +22,9 @@ class Report extends Component {
 
     onSubmit = event => {
         event.preventDefault();
-        const { dateStart, dateEnd } = this.state;
+        const { dateStart, dateEnd, status } = this.state;
         const body = {
-            dateStart, dateEnd
+            dateStart, dateEnd, status
         };
         apis.getStatementByPeriod(body)
             .then(response => {
@@ -74,7 +75,7 @@ class Report extends Component {
     }
 
     render() {
-        const { dateStart, dateEnd, total_pays, total_receives, isResults } = this.state;
+        const { dateStart, dateEnd, status, total_pays, total_receives, isResults } = this.state;
         return (
             <React.Fragment>
                 <Content>
@@ -103,6 +104,16 @@ class Report extends Component {
                                                         <div className="form-group">
                                                             <label htmlFor="name">Data Final</label>
                                                             <input className="form-control" type="date" value={dateEnd} name="dateEnd" required onChange={this.changeField} />
+                                                        </div>
+                                                    </div>
+                                                    <div className="col">
+                                                        <div className="form-group">
+                                                            <label htmlFor="name">Status</label>
+                                                            <select className="form-control" name="status" value={status} onChange={this.changeField}>
+                                                                <option value="">Selecionar o Status</option>
+                                                                <option value={'1'}>Pago/Recebido</option>
+                                                                <option value={'0'}>Não Pago/Não Recebido</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>

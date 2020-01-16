@@ -25,7 +25,7 @@ class Home extends Component {
     getStatements = () => {
         const { dateStart, dateEnd } = this.state;
         const body = {
-            dateStart, dateEnd
+            dateStart, dateEnd, status: '1'
         };
         apis.getStatementByPeriod(body)
             .then(response => {
