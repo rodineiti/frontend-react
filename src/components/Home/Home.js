@@ -90,38 +90,6 @@ class Home extends Component {
                 <Content>
                     <div className="row mb-3">
                         <div className="col">
-                            <div className="card card-primary">
-                                <div className="card-header">
-                                    Gráfico
-                                </div>
-                                <div className="card-body">
-                                    <h5 className="card-title">Chartjs</h5>
-                                    {isResults && (
-                                        <div className="row">
-                                            <div className="col-md-12">
-                                                <HighchartsReact
-                                                    highcharts={Highcharts}
-                                                    options={{
-                                                        chart: {
-                                                            type: 'pie'
-                                                        },
-                                                        title: {
-                                                            text: 'Gráfico de Finanças'
-                                                        },
-                                                        series: [{
-                                                            data: categories
-                                                        }]
-                                                    }}
-                                                />
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row mb-3">
-                        <div className="col">
                             <div className="card">
                                 <div className="card-header">
                                     Extrato
@@ -152,6 +120,38 @@ class Home extends Component {
                                                     {this.renderPays()}
                                                     {this.renderReceives()}
                                                 </div>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row mb-3">
+                        <div className="col">
+                            <div className="card card-primary">
+                                <div className="card-header">
+                                    Gráfico
+                                </div>
+                                <div className="card-body">
+                                    <h5 className="card-title">Chartjs</h5>
+                                    {isResults && (
+                                        <div className="row">
+                                            <div className="col-md-12">
+                                                <HighchartsReact
+                                                    highcharts={Highcharts}
+                                                    options={{
+                                                        chart: {
+                                                            type: 'pie'
+                                                        },
+                                                        title: {
+                                                            text: 'Gráfico de Finanças'
+                                                        },
+                                                        series: [{
+                                                            data: categories
+                                                        }]
+                                                    }}
+                                                />
                                             </div>
                                         </div>
                                     )}

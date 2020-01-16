@@ -110,7 +110,7 @@ class Report extends Component {
                                                         <div className="form-group">
                                                             <label htmlFor="name">Status</label>
                                                             <select className="form-control" name="status" value={status} onChange={this.changeField}>
-                                                                <option value="">Selecionar o Status</option>
+                                                                <option value="">Todos</option>
                                                                 <option value={'1'}>Pago/Recebido</option>
                                                                 <option value={'0'}>Não Pago/Não Recebido</option>
                                                             </select>
