@@ -94,19 +94,19 @@ class Report extends Component {
                                         <div className="col-md-12">
                                             <form method="post" onSubmit={this.onSubmit}>
                                                 <div className="row">
-                                                    <div className="col">
+                                                    <div className="col-md-4">
                                                         <div className="form-group">
                                                             <label htmlFor="name">Data Início</label>
                                                             <input className="form-control" type="date" value={dateStart} name="dateStart" required onChange={this.changeField} />
                                                         </div>
                                                     </div>
-                                                    <div className="col">
+                                                    <div className="col-md-4">
                                                         <div className="form-group">
                                                             <label htmlFor="name">Data Final</label>
                                                             <input className="form-control" type="date" value={dateEnd} name="dateEnd" required onChange={this.changeField} />
                                                         </div>
                                                     </div>
-                                                    <div className="col">
+                                                    <div className="col-md-4">
                                                         <div className="form-group">
                                                             <label htmlFor="name">Status</label>
                                                             <select className="form-control" name="status" value={status} onChange={this.changeField}>
