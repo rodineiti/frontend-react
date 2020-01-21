@@ -69,6 +69,12 @@ export const getLogin = (email, password) => api.post(`/oauth/token`, {
 });
 
 export const postRegister = (formData) => api.post(`/api/v1/auth/register`, formData);
+export const getConfirmation = (token ) => api.get(`/api/v1/auth/register/confirmation/${token }`);
+
+export const getForget = (email) => api.post(`/api/v1/auth/password/forget`, { email });
+export const getShowReset = (token ) => api.get(`/api/v1/auth/password/reset/${token }`);
+export const postReset = (formData) => api.post(`/api/v1/auth/password/reset`, formData);
+
 
 export const getCategories = () => api.get(`/api/v1/categories`);
 export const postCategories = (formData) => api.post(`/api/v1/categories/store`, formData);
@@ -95,7 +101,11 @@ export const getStatementByPeriod = (formData) => api.post(`/api/v1/statement`, 
 
 const apis = {
     getLogin,
+    getForget,
+    getShowReset,
+    postReset,
     postRegister,
+    getConfirmation,
     getCategories,
     postCategories,
     getCategory,

@@ -3,9 +3,11 @@ import { Switch, Route, Redirect } from 'react-router';
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
+import Forget from './components/Forget/Forget';
+import PasswordReset from './components/PasswordReset/PasswordReset';
+import Confirmation from './components/Confirmation/Confirmation';
 import Category from './components/Category/Category';
 import Graphic from './components/Graphic/Graphic';
-import { isLoggedIn } from './services/auth';
 import BillPay from './components/BillPay/BillPay';
 import BillReceive from './components/BillReceive/BillReceive';
 import Report from './components/Report/Report';
@@ -15,6 +17,7 @@ import AddBillReceive from './components/BillReceive/AddBillReceive';
 import EditBillReceive from './components/BillReceive/EditBillReceive';
 import AddBillPay from './components/BillPay/AddBillPay';
 import EditBillPay from './components/BillPay/EditBillPay';
+import { isLoggedIn } from './services/auth';
 
 function PrivateRoute({ component: Component, authenticated, ...rest }) {
     return (
@@ -32,6 +35,11 @@ function Routes(props) {
         <Switch>
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
+            <Route exact path="/confirmation/:token" component={Confirmation} />
+
+            <Route exact path="/forget" component={Forget} />
+            <Route exact path="/password/reset/:token" component={PasswordReset} />
+            
             <PrivateRoute exact path="/" authenticated={isLoggedIn()} component={Home} />
 
             <PrivateRoute exact path="/category" authenticated={isLoggedIn()} component={Category} />

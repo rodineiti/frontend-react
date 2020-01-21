@@ -7,7 +7,7 @@ import Routes from '../Routes';
 import { ToastContainer } from 'react-toastify';
 import { isLoggedIn } from '../services/auth';
 
-function App() {
+function App(props) {
   return (
     <>
       <div className="wrapper">

@@ -1,59 +1,70 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Content from '../Content';
 import Footer from '../Footer';
 
-import './Register.scss';
+import './PasswordReset.scss';
 import { errorsMessage } from '../../helpers';
-import { isLoggedIn } from '../../services/auth';
 import apis from '../../services/api';
 
-class Register extends Component {
+class PasswordReset extends Component {
 
     state = {
-        name: '',
         email: '',
         password: '',
         password_confirmation: '',
-        url: '/',
+        token: '',
         status: '',
         message: '',
+        url: '/login'
     };
 
     componentDidMount() {
-        if (isLoggedIn()) {
-            window.location.href = this.state.url;
-        }
+        const { token } = this.props.match.params;
+        this.showReset(token);
+    }
+
+    showReset = (token) => {
+        apis.getShowReset(token)
+            .then(response => {
+                if (response.data.status === 'success') {
+                    this.setState({ token: response.data.data.token });
+                } else {
+                    toast.info(response.data.message);
+                    this.setState({ status: 'danger', message: response.data.message });
+                }
+            }).catch(function (error) {
+                errorsMessage(error.response);
+            }).finally(() => console.log('end'));
     }
 
     onSubmit = e => {
         e.preventDefault();
-        if (this.state.name !== '' && this.state.email !== '' && this.state.password !== '' && this.state.password_confirmation !== '') {
+        if (this.state.email !== '' && this.state.password !== '' 
+                && this.state.password_confirmation !== '' && this.state.token !== '') {
+
             let body = {
-                name: this.state.name,
                 email: this.state.email,
                 password: this.state.password,
-                password_confirmation: this.state.password_confirmation
+                password_confirmation: this.state.password_confirmation,
+                token: this.state.token
             };
 
-            apis.postRegister(body)
+            apis.postReset(body)
                 .then(response => {
                     if (response.data.status === 'success') {
-                        toast.success(response.data.message);
                         this.setState({ 
                             status: 'success',
                             message: response.data.message,
-                            name: '',
                             email: '',
                             password: '',
                             password_confirmation: '',
+                            token: ''
                         });
                     } else {
-                        toast.info('Erro ao tentar cadastrar, favor verificar');
-                        this.setState({ 
-                            status: 'success',
-                            message: 'Erro ao tentar cadastrar, favor verificar'
-                        });
+                        toast.info(response.data.message);
+                        this.setState({ status: 'danger', message: response.data.message });
                     }
                 }).catch(function (error) {
                     errorsMessage(error.response);
@@ -61,46 +72,40 @@ class Register extends Component {
         }
     }
 
+    redirect(msg, timeout, url) {
+        toast.success(msg);
+        setTimeout(() => {
+            window.location.href = url;
+        }, timeout);
+    }
+
     render() {
-        const { name, email, password, password_confirmation, status, message } = this.state;
+        const { email, password, password_confirmation, status, message } = this.state;
 
         return (
             <Content>
                 <form className="form-signup text-center" onSubmit={(e) => this.onSubmit(e)}>
                     <img className="img-fluid mb-4" src="https://via.placeholder.com/570x75/007bff/00000?text=Rdn+Finance" alt="img" />
-                    <h1 className="h3 mb-3 font-weight-normal">Registro - Controle de Finanças</h1>
+                    <h1 className="h3 mb-3 font-weight-normal">Resetar Senha - Controle de Finanças</h1>
                     <div className={status !== '' ? `alert alert-${status}` : ``}>{message}</div>
-                    <div className="form-group">
-                        <label htmlFor="name" className="sr-only">Nome</label>
-                        <div className="input-group mb-2">
-                            <div className="input-group-prepend">
-                                <div className="input-group-text"><i className="fas fa-user"></i></div>
-                            </div>
-                            <input type="text" id="name" name="name" className="form-control" 
-                                value={name}
-                                placeholder="Nome" required onChange={e => this.setState({ name: e.target.value })} />
-                        </div>
-                    </div>
                     <div className="form-group">
                         <label htmlFor="email" className="sr-only">E-mail</label>
                         <div className="input-group mb-2">
                             <div className="input-group-prepend">
                                 <div className="input-group-text"><i className="fas fa-envelope-square"></i></div>
                             </div>
-                            <input type="email" id="email" name="email" className="form-control" 
-                                value={email}
-                                placeholder="E-mail" required onChange={e => this.setState({ email: e.target.value })} />
+                            <input type="email" id="email" name="email" className="form-control" placeholder="E-mail"
+                              value={email} required onChange={e => this.setState({ email: e.target.value })} />
                         </div>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="password" className="sr-only">Senha</label>
+                        <label htmlFor="password" className="sr-only">Nova Senha</label>
                         <div className="input-group mb-2">
                             <div className="input-group-prepend">
                                 <div className="input-group-text"><i className="fas fa-unlock-alt"></i></div>
                             </div>
-                            <input type="password" id="password" name="password" className="form-control" 
-                                value={password}
-                                placeholder="Senha" required onChange={e => this.setState({ password: e.target.value })} />
+                            <input type="password" id="password" name="password" className="form-control" placeholder="Senha"
+                              value={password} required onChange={e => this.setState({ password: e.target.value })} />
                         </div>
                     </div>
                     <div className="form-group">
@@ -109,15 +114,15 @@ class Register extends Component {
                             <div className="input-group-prepend">
                                 <div className="input-group-text"><i className="fas fa-unlock-alt"></i></div>
                             </div>
-                            <input type="password" id="password_confirmation" name="password_confirmation" 
-                                value={password_confirmation}
-                                className="form-control" placeholder="Confirmar Senha" required onChange={e => this.setState({ password_confirmation: e.target.value })} />
+                            <input type="password" id="password_confirmation" name="password_confirmation" className="form-control" placeholder="Confirmar Senha"
+                              value={password_confirmation} required onChange={e => this.setState({ password_confirmation: e.target.value })} />
                         </div>
                     </div>
                     <button
                         className="btn btn-lg btn-primary btn-block"
                         type="submit"
-                        disabled={!name || !email || !password || !password_confirmation}>Cadastrar <i className="fas fa-user-plus"></i></button>
+                        disabled={!email || !password || !password_confirmation}>Resetar <i className="fas fa-user-plus"></i></button>
+                    <Link to="/login" className="nav-link">Efetuar Login.</Link>
                 </form>
                 <Footer className={'footer'} />
             </Content>
@@ -125,4 +130,4 @@ class Register extends Component {
     }
 }
 
-export default Register;
+export default PasswordReset;

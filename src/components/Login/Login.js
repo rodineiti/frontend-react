@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Content from '../Content';
+import Footer from '../Footer';
 
 import './Login.scss';
 import { errorsMessage } from '../../helpers';
@@ -76,7 +78,9 @@ class Login extends Component {
                         className="btn btn-lg btn-primary btn-block"
                         type="submit"
                         disabled={!email || !password}>Entrar <i className="fas fa-sign-in-alt"></i></button>
+                        <Link to="/forget" className="nav-link">Esqueci minha senha</Link>
                 </form>
+                <Footer className={'footer'} />
             </Content>
         )
     };

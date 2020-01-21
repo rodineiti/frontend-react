@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import Condition from './Condition';
+import Footer from './Footer';
 
 function Sidebar(props) {
     return (
@@ -39,7 +40,8 @@ function Sidebar(props) {
                         <Link to="/graphic"><i className="fas fa-paper-plane"></i> Gráfico</Link>
                     </li>
                 </ul>
-            </nav>
+                <Footer className={''} />
+            </nav>            
         </Condition>
     );
 }
