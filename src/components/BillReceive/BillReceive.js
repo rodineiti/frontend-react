@@ -70,6 +70,7 @@ class BillReceive extends Component {
             return (
                 <tr key={key}>
                     <th scope="row">{item.id}</th>
+                    <td>{item.category.name}</td>
                     <td>{item.date_launch}</td>
                     <td>{item.name}</td>
                     <td>{item.value}</td>
@@ -107,6 +108,7 @@ class BillReceive extends Component {
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
+                                                <th scope="col">Categoria</th>
                                                 <th scope="col">Data Lançamento</th>
                                                 <th scope="col">Nome</th>
                                                 <th scope="col">Valor</th>

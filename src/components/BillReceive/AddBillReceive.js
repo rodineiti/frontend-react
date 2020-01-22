@@ -7,6 +7,7 @@ import { errorsMessage } from '../../helpers';
 
 class AddBillReceive extends Component {
     state = {
+        category_id: '',
         date_launch: '',
         name: '',
         value: '',
@@ -15,8 +16,9 @@ class AddBillReceive extends Component {
 
     onSubmit = event => {
         event.preventDefault();
-        const { date_launch, name, value, status } = this.state;
+        const { category_id, date_launch, name, value, status } = this.state;
         const body = {
+            category_id,
             date_launch,
             name,
             value,
@@ -43,7 +45,7 @@ class AddBillReceive extends Component {
     }
 
     render() {
-        const { date_launch, name, value, status } = this.state;
+        const { category_id, date_launch, name, value, status } = this.state;
         return (
             <React.Fragment>
                 <Content>
@@ -62,6 +64,15 @@ class AddBillReceive extends Component {
                                 </div>
                                 <div className="card-body">
                                     <form method="post" onSubmit={this.onSubmit}>
+                                        <div className="form-group">
+                                            <label htmlFor="name">Data de Lançamento</label>
+                                            <select className="form-control" name="category_id" value={category_id} onChange={this.changeField}>
+                                                <option value="">Selecionar uma Categoria</option>
+                                                {categories.map(item =>
+                                                    <option key={item.id} value={item.id}>{item.name}</option>
+                                                )}
+                                            </select>
+                                        </div>
                                         <div className="form-group">
                                             <label htmlFor="name">Data de Lançamento</label>
                                             <input className="form-control" type="date" value={date_launch} name="date_launch" required onChange={this.changeField} />
