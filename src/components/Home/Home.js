@@ -15,6 +15,8 @@ class Home extends Component {
         billReceives: [],
         total_pays: 0,
         total_receives: 0,
+        categoriesPay: [],
+        categoriesReceive: [],
         isResults: false
     }
 
@@ -44,14 +46,15 @@ class Home extends Component {
         apis.sumChartsByPeriod(body)
             .then(response => {
                 if (response.data.status === 'success') {
-                    this.setState({ categories: response.data.data });
+                    const { categoriesPay, categoriesReceive } = response.data.data;
+                    this.setState({ categoriesPay, categoriesReceive });
                 } else {
                     toast.info('Erro ao consultar');
-                    this.setState({ categories: [] });
+                    this.setState({ categoriesPay: [], categoriesReceive: [] });
                 }
             }).catch(function (error) {
                 errorsMessage(error.response);
-                this.setState({ categories: [] });
+                this.setState({ categoriesPay: [], categoriesReceive: [] });
             }).finally(() => console.log('end'));
     }
 
@@ -84,7 +87,7 @@ class Home extends Component {
     }
 
     render() {
-        const { total_pays, total_receives, categories, dateStart, dateEnd, isResults } = this.state;
+        const { total_pays, total_receives, categoriesPay, categoriesReceive, dateStart, dateEnd, isResults } = this.state;
         return (
             <React.Fragment>
                 <Content>
@@ -137,7 +140,7 @@ class Home extends Component {
                                     <h5 className="card-title">Chartjs</h5>
                                     {isResults && (
                                         <div className="row">
-                                            <div className="col-md-12">
+                                            <div className="col-md-6">
                                                 <HighchartsReact
                                                     highcharts={Highcharts}
                                                     options={{
@@ -145,10 +148,26 @@ class Home extends Component {
                                                             type: 'pie'
                                                         },
                                                         title: {
-                                                            text: 'Gráfico de Finanças'
+                                                            text: 'Gráfico de Finanças - Pagos'
                                                         },
                                                         series: [{
-                                                            data: categories
+                                                            data: categoriesPay
+                                                        }]
+                                                    }}
+                                                />
+                                            </div>
+                                            <div className="col-md-6">
+                                                <HighchartsReact
+                                                    highcharts={Highcharts}
+                                                    options={{
+                                                        chart: {
+                                                            type: 'pie'
+                                                        },
+                                                        title: {
+                                                            text: 'Gráfico de Finanças - Recebidos'
+                                                        },
+                                                        series: [{
+                                                            data: categoriesReceive
                                                         }]
                                                     }}
                                                 />

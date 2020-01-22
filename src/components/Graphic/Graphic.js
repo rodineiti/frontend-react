@@ -10,7 +10,8 @@ class Graphic extends Component {
     state = {
         dateStart: '',
         dateEnd: '',
-        categories: [],
+        ategoriesPay: [],
+        categoriesReceive: [],
         isResults: false
     }
 
@@ -27,14 +28,15 @@ class Graphic extends Component {
         apis.sumChartsByPeriod(body)
             .then(response => {
                 if (response.data.status === 'success') {
-                    this.setState({ categories: response.data.data, isResults: true });
+                    const { categoriesPay, categoriesReceive } = response.data.data;
+                    this.setState({ categoriesPay, categoriesReceive, isResults: true });
                 } else {
                     toast.info('Erro ao consultar');
-                    this.setState({ categories: [], isResults: false });
+                    this.setState({ categoriesPay: [], categoriesReceive: [], isResults: false });
                 }
             }).catch(function (error) {
                 errorsMessage(error.response);
-                this.setState({ categories: [], isResults: false });
+                this.setState({ categoriesPay: [], categoriesReceive: [], isResults: false });
             }).finally(() => console.log('end'));
     }
 
@@ -44,7 +46,7 @@ class Graphic extends Component {
     }
 
     render() {
-        const { dateStart, dateEnd, categories, isResults } = this.state;
+        const { dateStart, dateEnd, categoriesPay, categoriesReceive, isResults } = this.state;
         return (
             <React.Fragment>
                 <Content>
@@ -84,7 +86,7 @@ class Graphic extends Component {
                                     </div>
                                     {isResults && (
                                         <div className="row">
-                                            <div className="col-md-12">
+                                            <div className="col-md-6">
                                                 <HighchartsReact
                                                     highcharts={Highcharts}
                                                     options={{
@@ -92,10 +94,26 @@ class Graphic extends Component {
                                                             type: 'pie'
                                                         },
                                                         title: {
-                                                            text: 'Gráfico de Finanças'
+                                                            text: 'Gráfico de Finanças - Pagos'
                                                         },
                                                         series: [{
-                                                            data: categories
+                                                            data: categoriesPay
+                                                        }]
+                                                    }}
+                                                />
+                                            </div>
+                                            <div className="col-md-6">
+                                                <HighchartsReact
+                                                    highcharts={Highcharts}
+                                                    options={{
+                                                        chart: {
+                                                            type: 'pie'
+                                                        },
+                                                        title: {
+                                                            text: 'Gráfico de Finanças - Recebidos'
+                                                        },
+                                                        series: [{
+                                                            data: categoriesReceive
                                                         }]
                                                     }}
                                                 />
