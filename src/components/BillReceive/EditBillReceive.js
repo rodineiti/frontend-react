@@ -11,12 +11,23 @@ class EditBillReceive extends Component {
         date_launch: '',
         name: '',
         value: '',
-        status: ''
+        status: '',
+        categories: []
     }
 
     componentDidMount() {
         const { id } = this.props.match.params;
+        this.getCategories();
         this.show(id);
+    }
+
+    getCategories = () => {
+        apis.getCategories()
+            .then(response => {
+                this.setState({ categories: response.data.data });
+            }).catch(function (error) {
+                errorsMessage(error.response);
+            }).finally(() => console.log('end'));
     }
 
     show = (id) => {
@@ -61,7 +72,7 @@ class EditBillReceive extends Component {
     }
 
     render() {
-        const { category_id, date_launch, name, value, status } = this.state;
+        const { category_id, date_launch, name, value, status, categories } = this.state;
         return (
             <React.Fragment>
                 <Content>

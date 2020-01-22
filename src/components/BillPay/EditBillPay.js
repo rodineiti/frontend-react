@@ -17,8 +17,17 @@ class EditBillPay extends Component {
 
     componentDidMount() {
         const { id } = this.props.match.params;
-        this.show(id);
         this.getCategories();
+        this.show(id);
+    }
+
+    getCategories = () => {
+        apis.getCategories()
+            .then(response => {
+                this.setState({ categories: response.data.data });
+            }).catch(function (error) {
+                errorsMessage(error.response);
+            }).finally(() => console.log('end'));
     }
 
     show = (id) => {
@@ -26,15 +35,6 @@ class EditBillPay extends Component {
             .then(response => {
                 const { category_id, date_launch, name, value, status } = response.data.data;
                 this.setState({ category_id, date_launch, name, value, status: status ? '1' : '0' });
-            }).catch(function (error) {
-                errorsMessage(error.response);
-            }).finally(() => console.log('end'));
-    }
-
-    getCategories = () => {
-        apis.getCategories()
-            .then(response => {
-                this.setState({ categories: response.data.data });
             }).catch(function (error) {
                 errorsMessage(error.response);
             }).finally(() => console.log('end'));

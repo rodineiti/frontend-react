@@ -11,7 +11,21 @@ class AddBillReceive extends Component {
         date_launch: '',
         name: '',
         value: '',
-        status: '1'
+        status: '1',
+        categories: []
+    }
+
+    componentDidMount() {
+        this.getCategories();
+    }
+
+    getCategories = () => {
+        apis.getCategories()
+            .then(response => {
+                this.setState({ categories: response.data.data });
+            }).catch(function (error) {
+                errorsMessage(error.response);
+            }).finally(() => console.log('end'));
     }
 
     onSubmit = event => {
@@ -45,7 +59,7 @@ class AddBillReceive extends Component {
     }
 
     render() {
-        const { category_id, date_launch, name, value, status } = this.state;
+        const { category_id, date_launch, name, value, status, categories } = this.state;
         return (
             <React.Fragment>
                 <Content>
