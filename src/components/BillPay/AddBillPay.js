@@ -79,7 +79,7 @@ class AddBillPay extends Component {
                                 <div className="card-body">
                                     <form method="post" onSubmit={this.onSubmit}>
                                         <div className="form-group">
-                                            <label htmlFor="name">Data de Lançamento</label>
+                                            <label htmlFor="name">Categoria</label>
                                             <select className="form-control" name="category_id" value={category_id} onChange={this.changeField}>
                                                 <option value="">Selecionar uma Categoria</option>
                                                 {categories.map(item =>
