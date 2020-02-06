@@ -11,6 +11,7 @@ class Report extends Component {
         status: '1',
         billPays: [],
         billReceives: [],
+        statements: [],
         total_pays: 0,
         total_receives: 0,
         isResults: false
@@ -29,15 +30,15 @@ class Report extends Component {
         apis.getStatementByPeriod(body)
             .then(response => {
                 if (response.data.status === 'success') {
-                    const { billPays, billReceives, total_pays, total_receives } = response.data.data;
-                    this.setState({ billPays, billReceives, total_pays, total_receives, isResults: true });
+                    const { billPays, billReceives, statements, total_pays, total_receives } = response.data.data;
+                    this.setState({ billPays, billReceives, statements, total_pays, total_receives, isResults: true });
                 } else {
                     toast.info('Erro ao consultar');
-                    this.setState({ billPays: [], billReceives: [], total_pays: 0, total_receives: 0, isResults: false });
+                    this.setState({ billPays: [], billReceives: [], statements: [], total_pays: 0, total_receives: 0, isResults: false });
                 }
             }).catch(function (error) {
                 errorsMessage(error.response);
-                this.setState({ billPays: [], billReceives: [], total_pays: 0, total_receives: 0, isResults: false });
+                this.setState({ billPays: [], billReceives: [], statements: [], total_pays: 0, total_receives: 0, isResults: false });
             }).finally(() => console.log('end'));
     }
 
@@ -46,28 +47,14 @@ class Report extends Component {
         this.setState({ [name]: value });
     }
 
-    renderPays() {
-        let data = this.state.billPays || [];
-        return data.map((item, key) => {
+    renderStetements() {
+        let data = this.state.statements || [];
+        return Object.values(data).map((item, key) => {
             return (
                 <a key={key} href="#/" className="list-group-item list-group-item-action">
                     <div className="d-flex w-100 justify-content-between">
-                        <h5 className="mb-1"><i className="fas fa-minus"></i> {item.date_launch} - {item.name}</h5>
-                        <span className="badge badge-danger badge-pill"> - R$ {item.value}</span>
-                    </div>
-                </a>
-            )
-        });
-    }
-
-    renderReceives() {
-        let data = this.state.billReceives || [];
-        return data.map((item, key) => {
-            return (
-                <a key={key} href="#/" className="list-group-item list-group-item-action">
-                    <div className="d-flex w-100 justify-content-between">
-                        <h5 className="mb-1"><i className="fas fa-plus"></i> {item.date_launch} - {item.name}</h5>
-                        <span className="badge badge-primary badge-pill"> + R$ {item.value}</span>
+                        <h5 className="mb-1"><i className={item.type === 'in' ? 'fas fa-plus' : 'fas fa-minus'}></i> {item.date_launch} - {item.name}</h5>
+                        <span className={`badge badge-pill ${item.type === 'in' ? 'badge-primary' : 'badge-warning'}`}>R$ {item.value}</span>
                     </div>
                 </a>
             )
@@ -144,8 +131,7 @@ class Report extends Component {
                                             </div>
                                             <div className="col-md-12">
                                                 <div className="list-group">
-                                                    {this.renderPays()}
-                                                    {this.renderReceives()}
+                                                    {this.renderStetements()}
                                                 </div>
                                             </div>
                                         </div>
