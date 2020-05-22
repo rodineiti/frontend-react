@@ -1,3 +1,6 @@
+[![Build](https://img.shields.io/scrutinizer/build/g/rodineiti/frontend-react.svg?style=flat-square)](https://scrutinizer-ci.com/g/rodineiti/frontend-react)
+[![Quality Score](https://img.shields.io/scrutinizer/g/rodineiti/frontend-react.svg?style=flat-square)](https://scrutinizer-ci.com/g/rodineiti/frontend-react)
+
 # frontend-react
 Frontend - Sistema de controle de finanças pessoal multi usuários
 
