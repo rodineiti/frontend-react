@@ -18,4 +18,5 @@ export const errorsMessage = (err) => {
         toast.info(message);
         return err;
     }
+    return;
 }
