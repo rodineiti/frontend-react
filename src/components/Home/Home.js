@@ -64,8 +64,8 @@ class Home extends Component {
         return Object.values(data).map((item, key) => {
             return (
                 <a key={key} href="#/" className="list-group-item list-group-item-action">
-                    <div className="d-flex w-100 justify-content-between">
-                        <h5 className="mb-1"><i className={item.type === 'in' ? 'fas fa-plus' : 'fas fa-minus'}></i> {item.date_launch} - {item.name}</h5>
+                    <div className="d-flex w-100 justify-content-between align-items-center">
+                        <h6 className="mb-1"><i className={item.type === 'in' ? 'fas fa-plus' : 'fas fa-minus'}></i> {item.date_launch} - {item.name}</h6>
                         <span className={`badge badge-pill ${item.type === 'in' ? 'badge-primary' : 'badge-warning'}`}>R$ {item.value}</span>
                     </div>
                 </a>

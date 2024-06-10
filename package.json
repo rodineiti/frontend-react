@@ -9,6 +9,9 @@
   ],
   "description": "project react frontend personal finance management systems",
   "version": "0.1.0",
+  "engines": {
+    "node": ">=8.0.0 <11.0.0"
+  },
   "private": true,
   "dependencies": {
     "axios": "^0.19.1",

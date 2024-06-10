@@ -6,7 +6,7 @@ function Footer(props) {
           © {new Date().getFullYear()} RDN Finance.
           Desenvolvedor <a className="nav-link" 
                             href="https://www.linkedin.com/in/rodineiteixeiradev" 
-                            target="_blank">Rodinei Teixeira</a>
+                            target="_blank" rel="noopener noreferrer">Rodinei Teixeira</a>
         </footer>
     );
 }
